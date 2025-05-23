@@ -28,7 +28,7 @@
       <div class="px-4 py-5 text-center header-bg">
         <header class="row container">
           <div class="col-3">
-            <img src="./assets/images/Logo.png" />
+            <img src="./assets/images/Logo.png" alt="image d'un repas" />
           </div>
         </header>
         <div class="col-lg-8 mx-auto px-5 d-flex flex-column justify-content-center header-content">
@@ -53,261 +53,95 @@
           </form>
         </div>
       </div>
-      <section class="container mt-4 filters">
+      <section class="container mt-4 filters" id="filters">
         <div class="row">
           <div class="col-lg-2 col-sm-6 mb-3">
-            <div class="dropdown">
+            <div class="dropdown ingredients">
               <button
-                class="btn btn-light w-100 d-flex justify-content-between align-items-center"
-                type="button"
-                id="dropdownMenuButton"
+                class="filter-button btn btn-light w-100 d-flex justify-content-between align-items-center"
+                id="dropdown-button-ingredient"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
               >
                 <span>Ingrédients</span>
-                <i class="fa-solid fa-chevron-down"></i>
+                <i class="fa-solid fa-chevron-down chevron"></i>
               </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div
+                class="dropdown-menu ingredients-menu overflow-auto"
+              >
                 <div class="input-group p-2">
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control ingredients-input" />
                   <span class="input-group-text">
                     <i class="fa fa-search"></i>
                   </span>
                 </div>
-                <a class="dropdown-item" href="#">Jus de citron</a>
-                <a class="dropdown-item" href="#">Glaçon</a>
-                <a class="dropdown-item" href="#">Tomate</a>
+                <div class="dropdown-menu-items"></div>
               </div>
-              <div class="filter-results mt-4">
-                <button class="btn w-100 d-flex justify-content-between align-items-center mb-3">
-                  <span>Crème de coco</span>
-                  <i class="fa-solid fa-xmark"></i>
-                  <i class="fa-solid fa-circle-xmark"></i>
-                </button>
-                <button class="btn w-100 d-flex justify-content-between align-items-center mb-3">
-                  <span>Crème de coco</span>
-                  <i class="fa-solid fa-xmark"></i>
-                  <i class="fa-solid fa-circle-xmark"></i>
-                </button>
-              </div>
+              <div class="filter-results filter-results-ingredients mt-4"></div>
             </div>
           </div>
           <div class="col-lg-2 col-sm-6 mb-3">
-            <div class="dropdown">
+            <div class="dropdown appliances">
               <button
-                class="btn btn-light w-100 d-flex justify-content-between align-items-center"
-                type="button"
-                id="dropdownMenuButton"
+                class="filter-button btn btn-light w-100 d-flex justify-content-between align-items-center"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <span>Ingrédients</span>
-                <i class="fa-solid fa-chevron-down"></i>
+                <span>Appareils</span>
+                <i class="fa-solid fa-chevron-down chevron"></i>
               </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div
+                class="dropdown-menu appliances-menu overflow-auto"
+              >
                 <div class="input-group p-2">
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control appliances-input" />
                   <span class="input-group-text">
                     <i class="fa fa-search"></i>
                   </span>
                 </div>
-                <a class="dropdown-item" href="#">Jus de citron</a>
-                <a class="dropdown-item" href="#">Glaçon</a>
-                <a class="dropdown-item" href="#">Tomate</a>
+                <div class="dropdown-menu-items"></div>
               </div>
-              <div class="filter-results mt-4">
-                <button class="btn w-100 d-flex justify-content-between align-items-center mb-3">
-                  <span>Crème de coco</span>
-                  <i class="fa-solid fa-xmark"></i>
-                  <i class="fa-solid fa-circle-xmark"></i>
-                </button>
-                <button class="btn w-100 d-flex justify-content-between align-items-center mb-3">
-                  <span>Crème de coco</span>
-                  <i class="fa-solid fa-xmark"></i>
-                  <i class="fa-solid fa-circle-xmark"></i>
-                </button>
-              </div>
+              <div class="filter-results filter-results-appliances mt-4"></div>
             </div>
           </div>
           <div class="col-lg-2 col-sm-6 mb-3">
-            <div class="dropdown">
+            <div class="dropdown ustensils">
               <button
-                class="btn btn-light w-100 d-flex justify-content-between align-items-center"
-                type="button"
-                id="dropdownMenuButton"
+                class="filter-button btn btn-light w-100 d-flex justify-content-between align-items-center"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <span>Ingrédients</span>
-                <i class="fa-solid fa-chevron-down"></i>
+                <span>Ustensiles</span>
+                <i class="fa-solid fa-chevron-down chevron"></i>
               </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div
+                class="dropdown-menu ustensils-menu overflow-auto"
+              >
                 <div class="input-group p-2">
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control ustensils-input" />
                   <span class="input-group-text">
                     <i class="fa fa-search"></i>
                   </span>
                 </div>
-                <a class="dropdown-item" href="#">Jus de citron</a>
-                <a class="dropdown-item" href="#">Glaçon</a>
-                <a class="dropdown-item" href="#">Tomate</a>
+                <div class="dropdown-menu-items"></div>
               </div>
+              <div class="filter-results filter-results-ustensils mt-4"></div>
             </div>
           </div>
           <div class="col-lg-6 col-sm-6 text-end">
-            <h3 class="mt-2">1500 recettes</h3>
+            <h3 class="mt-2 recipe-count"></h3>
           </div>
         </div>
       </section>
-      <section class="container mt-5 mb-5 pb-5">
-        <div class="row">
-          <div class="col-lg-4 col-sm-6">
-            <div class="card">
-              <span class="position-absolute badge rounded-pill text-bg-warning">10 min</span>
-              <div class="card-header p-0">
-                <img
-                  class="card-img-top"
-                  src="./assets/images/recettes/Recette01.jpg"
-                  alt="Card image cap"
-                />
-              </div>
-              <div class="card-body fs-14">
-                <h5 class="card-title my-3">Limonade de coco</h5>
-                <p class="card-subtitle mt-4 mb-2 text-muted text-uppercase">
-                  Recette
-                </p>
-                <p class="card-text">
-                  Mettre les glaçons à votre goût dans le blender, Ajouter le
-                  lait la crème de coco, le jus de 2 citrons et le sucre
-                  ensemble. Mixer jusqu'à obtenir la consistance désirée.
-                </p>
-                <p class="card-subtitle mt-4 mb-2 text-muted text-uppercase">
-                  Ingrédients
-                </p>
-                <div class="row">
-                  <div class="col-6 mb-4">
-                    <span class="fs-6 fw-bold">Lait de coco</span>
-                    <br />
-                    <span class="fs-6 text-black-50">400ml</span>
-                  </div>
-                  <div class="col-6 mb-4">
-                    <span class="fs-6 fw-bold">Lait de coco</span>
-                    <br />
-                    <span class="fs-6 text-black-50">400ml</span>
-                  </div>
-                  <div class="col-6 mb-4">
-                    <span class="fs-6 fw-bold">Lait de coco</span>
-                    <br />
-                    <span class="fs-6 text-black-50">400ml</span>
-                  </div>
-                  <div class="col-6 mb-4">
-                    <span class="fs-6 fw-bold">Lait de coco</span>
-                    <br />
-                    <span class="fs-6 text-black-50">400ml</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <div class="card">
-              <div class="card-header p-0">
-                <img
-                  class="card-img-top"
-                  src="./assets/images/recettes/Recette01.jpg"
-                  alt="Card image cap"
-                />
-              </div>
-              <div class="card-body fs-14">
-                <h5 class="card-title my-3">Limonade de coco</h5>
-                <p class="card-subtitle mt-4 mb-2 text-muted text-uppercase">
-                  Recette
-                </p>
-                <p class="card-text">
-                  Mettre les glaçons à votre goût dans le blender, Ajouter le
-                  lait la crème de coco, le jus de 2 citrons et le sucre
-                  ensemble. Mixer jusqu'à obtenir la consistance désirée.
-                </p>
-                <p class="card-subtitle mt-4 mb-2 text-muted text-uppercase">
-                  Ingrédients
-                </p>
-                <div class="row">
-                  <div class="col-6 mb-4">
-                    <span class="fs-6 fw-bold">Lait de coco</span>
-                    <br />
-                    <span class="fs-6 text-black-50">400ml</span>
-                  </div>
-                  <div class="col-6 mb-4">
-                    <span class="fs-6 fw-bold">Lait de coco</span>
-                    <br />
-                    <span class="fs-6 text-black-50">400ml</span>
-                  </div>
-                  <div class="col-6 mb-4">
-                    <span class="fs-6 fw-bold">Lait de coco</span>
-                    <br />
-                    <span class="fs-6 text-black-50">400ml</span>
-                  </div>
-                  <div class="col-6 mb-4">
-                    <span class="fs-6 fw-bold">Lait de coco</span>
-                    <br />
-                    <span class="fs-6 text-black-50">400ml</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <div class="card">
-              <div class="card-header p-0">
-                <img
-                  class="card-img-top"
-                  src="./assets/images/recettes/Recette01.jpg"
-                  alt="Card image cap"
-                />
-              </div>
-              <div class="card-body fs-14">
-                <h5 class="card-title my-3">Limonade de coco</h5>
-                <p class="card-subtitle mt-4 mb-2 text-muted text-uppercase">
-                  Recette
-                </p>
-                <p class="card-text">
-                  Mettre les glaçons à votre goût dans le blender, Ajouter le
-                  lait la crème de coco, le jus de 2 citrons et le sucre
-                  ensemble. Mixer jusqu'à obtenir la consistance désirée.
-                </p>
-                <p class="card-subtitle mt-4 mb-2 text-muted text-uppercase">
-                  Ingrédients
-                </p>
-                <div class="row">
-                  <div class="col-6 mb-4">
-                    <span class="fs-6 fw-bold">Lait de coco</span>
-                    <br />
-                    <span class="fs-6 text-black-50">400ml</span>
-                  </div>
-                  <div class="col-6 mb-4">
-                    <span class="fs-6 fw-bold">Lait de coco</span>
-                    <br />
-                    <span class="fs-6 text-black-50">400ml</span>
-                  </div>
-                  <div class="col-6 mb-4">
-                    <span class="fs-6 fw-bold">Lait de coco</span>
-                    <br />
-                    <span class="fs-6 text-black-50">400ml</span>
-                  </div>
-                  <div class="col-6 mb-4">
-                    <span class="fs-6 fw-bold">Lait de coco</span>
-                    <br />
-                    <span class="fs-6 text-black-50">400ml</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <section class="container recipes mt-5 mb-5 pb-5">
+        <div class="row"></div>
       </section>
     </main>
+    <script src="./scripts/templates/article.js"></script>
+    <script src="./scripts/templates/ingredientCard.js"></script>
+    <script type="module" src="./scripts/index.js"></script>
   </body>
 </html>
