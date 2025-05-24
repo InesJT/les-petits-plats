@@ -1,6 +1,6 @@
 body {
   font-family: "Manrope", serif;
-  font-optical-sizing: auto;
+  font-size: 14px;
   font-style: normal;
   background-color: #EDEDED;
 }
@@ -68,6 +68,7 @@ h6 {
   border-radius: 21px;
   overflow: hidden;
   border: none;
+  min-height: 770px;
 }
 
 .card-header img {
@@ -91,6 +92,21 @@ h6 {
   font-size: 14px;
 }
 
+.dropdown-menu {
+    width: 100%;
+}
+
+.dropdown-menu .dropdown-menu-items {
+  max-height: 250px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.dropdown-menu .dropdown-menu-items::-webkit-scrollbar {
+  display: none;
+}
+
 .dropdown-menu .input-group-text {
   position: absolute;
   background-color: transparent;
@@ -99,4 +115,13 @@ h6 {
   margin-top: 5px;
   color: #dedede;
   z-index: 10;
+}
+
+a.dropdown-item:hover {
+  background-color: rgba(255, 209, 91, 1);
+}
+
+p.card-text {
+  height: 109px;
+  overflow: hidden;
 }
