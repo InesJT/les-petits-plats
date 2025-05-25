@@ -37,19 +37,18 @@ class App {
   buildRecipes(recipes) {
     const recipesContainer = document.querySelector(".recipes .row");
     recipesContainer.innerHTML = "";
-    for (let i = 0; i < recipes.length; i++) {
-      const recipe = recipes[i];
+    recipes.forEach((recipe) => {
       const article = document.createElement("article");
       article.classList = "col-lg-4 col-sm-6 mb-5";
       const articleModel = articleTemplate(recipe);
       article.innerHTML = articleModel.getInnerHtml();
       const ingredientsContainer = article.querySelector(".ingredients-container");
       const ingredientsElements = this.buildIngredients(recipe.ingredients);
-      for (let j = 0; j < ingredientsElements.length; j++) {
-        ingredientsContainer.appendChild(ingredientsElements[j]);
-      }
+      ingredientsElements.forEach((ingredientsElement) => {
+        ingredientsContainer.appendChild(ingredientsElement);
+      });
       recipesContainer.appendChild(article);
-    }
+    });
     if (recipes.length === 0) {
       const errorMessageElement = document.createElement("p");
       const searchTextElement = document.querySelector("input");
@@ -62,8 +61,7 @@ class App {
 
   buildIngredients(ingredients) {
     const ingredientsElements = [];
-    for (let i = 0; i < ingredients.length; i++) {
-      const ingredient = ingredients[i];
+    ingredients.forEach((ingredient) => {
       if (ingredient.unit === undefined) {
         ingredient.unit = "";
       }
@@ -76,17 +74,16 @@ class App {
       const ingredientModel = ingredientCardTemplate(ingredient);
       ingredientCard.innerHTML = ingredientModel.getInnerHtml();
       ingredientsElements.push(ingredientCard);
-    }
+    });
     return ingredientsElements;
   }
 
   buildFilters(data) {
     const recipeFactory = new RecipeFactory();
     const filtersData = recipeFactory.getFilters(data);
-    for (let i = 0; i < this.filterNames.length; i++) {
-      const filterName = this.filterNames[i];
+    this.filterNames.forEach(filterName => {
       this.buildFilter(filtersData[filterName], filterName);
-    }
+    });
     this.initFilterChoiceAction();
   }
 
@@ -102,7 +99,6 @@ class App {
       menuItem.textContent = value;
       menuElement.appendChild(menuItem);
     });
-
   }
 
   initFilterChoiceAction() {
@@ -155,7 +151,9 @@ class App {
         }
         // Vider le champs de recherche des filtres 
         const inputfilterSearch = menu.querySelector('input.form-control')
-        inputfilterSearch.value = null;
+        if (inputfilterSearch) {
+          inputfilterSearch.value = null;
+        }
         this.buildFilters(this.filteredRecipes)
       });
     });
@@ -216,7 +214,6 @@ class App {
     filterInputs.forEach((filterInput) => {
       filterInput.addEventListener("input", (event) => {
         const searchText = event.target.value.toLowerCase();
-
         if (event.target.classList.contains("ingredients-input")) {
           filteredData = Array.from(filtersData.ingredients).filter((data) =>
             data.includes(searchText)
@@ -261,8 +258,11 @@ class App {
         resultElement.classList =
           "btn w-100 d-flex justify-content-between align-items-center mb-3";
         resultElement.innerHTML = `                  
-                <span>${value}</span>
-                <i class="fa-solid fa-circle-xmark"></i>`;
+                 <span>${value}</span>
+  <span class="icons">
+    <i class="fa-solid fa-xmark"></i>
+    <i class="fa-solid fa-circle-xmark"></i>
+  </span>`;
         resultElement.dataset.filterName = filterName;
         filterResultElement.appendChild(resultElement);
       });
