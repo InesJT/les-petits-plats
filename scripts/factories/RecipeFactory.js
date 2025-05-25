@@ -49,7 +49,7 @@ export class RecipeFactory {
       const matchesIngredients =
         selectedIngredients.length === 0 ||
         selectedIngredients.every((ingredientName) =>
-          recipe.ingredients.some(
+          recipe.ingredients.some(     
             (ing) => ing.ingredient.toLowerCase() === ingredientName
           )
         );
