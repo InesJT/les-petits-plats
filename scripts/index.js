@@ -132,7 +132,7 @@ class App {
         const chevron = event.target
           .closest("button")
           .querySelector(".chevron");
-        if (dropdownMenu.style.display === "none") {
+        if (dropdownMenu.style.display === "none"  || dropdownMenu.style.display === "") {
           this.closeAllDropdowns();
           dropdownMenu.style.display = "block";
           chevron.classList.remove("fa-chevron-down");
@@ -180,6 +180,9 @@ class App {
 
   // initialiser le addEventListener pour la recherche principale
   initGeneralSearchAction() {
+    document.querySelector('.search-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+    });
     const generalSearchInput = document.querySelector("form.search-form input");
     generalSearchInput.addEventListener("input", (event) => {
       // Supprime les caractères non valides de la saisie
