@@ -56,12 +56,13 @@ h6 {
   font-weight: 700;
 }
 
-.filter-choice-btn .fa-xmark {
+.filter-results  .fa-xmark {
   display: block;
 }
-.filter-choice-btn .fa-circle-xmark {
+.filter-results  .fa-circle-xmark {
   display: none;
 }
+
 .filter-results button:hover i.fa-xmark {
   display: none;
 }
