@@ -65,10 +65,10 @@ class App {
     for (let i = 0; i < ingredients.length; i++) {
       const ingredient = ingredients[i];
       if (ingredient.unit === undefined) {
-      ingredient.unit = "";
+        ingredient.unit = "";
       }
       if (ingredient.quantity === undefined) {
-      ingredient.quantity = "-";
+        ingredient.quantity = "-";
       }
 
       const ingredientCard = document.createElement("div");
@@ -93,7 +93,7 @@ class App {
   buildFilter(values, menuName) {
     const menuElement = document.querySelector(`.${menuName}-menu .dropdown-menu-items`);
     menuElement.innerHTML = "";
-    
+
     values.forEach((value) => {
       const menuItem = document.createElement("a");
       menuItem.classList.add("dropdown-item");
@@ -102,7 +102,7 @@ class App {
       menuItem.textContent = value;
       menuElement.appendChild(menuItem);
     });
-    
+
   }
 
   initFilterChoiceAction() {
@@ -132,7 +132,7 @@ class App {
         const chevron = event.target
           .closest("button")
           .querySelector(".chevron");
-        if (dropdownMenu.style.display === "none"  || dropdownMenu.style.display === "") {
+        if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
           this.closeAllDropdowns();
           dropdownMenu.style.display = "block";
           chevron.classList.remove("fa-chevron-down");
@@ -180,7 +180,7 @@ class App {
 
   // initialiser le addEventListener pour la recherche principale
   initGeneralSearchAction() {
-    document.querySelector('.search-form').addEventListener('submit', function(event) {
+    document.querySelector('.search-form').addEventListener('submit', function (event) {
       event.preventDefault();
     });
     const generalSearchInput = document.querySelector("form.search-form input");
@@ -218,21 +218,21 @@ class App {
         const searchText = event.target.value.toLowerCase();
 
         if (event.target.classList.contains("ingredients-input")) {
-          filteredData = filtersData.ingredients.filter((data) =>
+          filteredData = Array.from(filtersData.ingredients).filter((data) =>
             data.includes(searchText)
           );
           this.buildFilter(filteredData, "ingredients");
         }
 
         if (event.target.classList.contains("appliances-input")) {
-          filteredData = filtersData.appliances.filter((data) =>
+          filteredData = Array.from(filtersData.appliances).filter((data) =>
             data.includes(searchText)
           );
           this.buildFilter(filteredData, "appliances");
         }
 
         if (event.target.classList.contains("ustensils-input")) {
-          filteredData = filtersData.ustensils.filter((data) =>
+          filteredData = Array.from(filtersData.ustensils).filter((data) =>
             data.includes(searchText)
           );
           this.buildFilter(filteredData, "ustensils");
@@ -262,7 +262,6 @@ class App {
           "btn w-100 d-flex justify-content-between align-items-center mb-3";
         resultElement.innerHTML = `                  
                 <span>${value}</span>
-                <i class="fa-solid fa-xmark"></i>
                 <i class="fa-solid fa-circle-xmark"></i>`;
         resultElement.dataset.filterName = filterName;
         filterResultElement.appendChild(resultElement);
