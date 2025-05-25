@@ -151,7 +151,9 @@ class App {
         }
         // Vider le champs de recherche des filtres 
         const inputfilterSearch = menu.querySelector('input.form-control')
-        inputfilterSearch.value = null;
+        if (inputfilterSearch) {
+          inputfilterSearch.value = null;
+        }
         this.buildFilters(this.filteredRecipes)
       });
     });
@@ -176,7 +178,7 @@ class App {
 
   // initialiser le addEventListener pour la recherche principale
   initGeneralSearchAction() {
-    document.querySelector('.search-form').addEventListener('submit', function(event) {
+    document.querySelector('.search-form').addEventListener('submit', function (event) {
       event.preventDefault();
     });
     const generalSearchInput = document.querySelector("form.search-form input");
@@ -212,23 +214,22 @@ class App {
     filterInputs.forEach((filterInput) => {
       filterInput.addEventListener("input", (event) => {
         const searchText = event.target.value.toLowerCase();
-
         if (event.target.classList.contains("ingredients-input")) {
-          filteredData = filtersData.ingredients.filter((data) =>
+          filteredData = Array.from(filtersData.ingredients).filter((data) =>
             data.includes(searchText)
           );
           this.buildFilter(filteredData, "ingredients");
         }
 
         if (event.target.classList.contains("appliances-input")) {
-          filteredData = filtersData.appliances.filter((data) =>
+          filteredData = Array.from(filtersData.appliances).filter((data) =>
             data.includes(searchText)
           );
           this.buildFilter(filteredData, "appliances");
         }
 
         if (event.target.classList.contains("ustensils-input")) {
-          filteredData = filtersData.ustensils.filter((data) =>
+          filteredData = Array.from(filtersData.ustensils).filter((data) =>
             data.includes(searchText)
           );
           this.buildFilter(filteredData, "ustensils");
