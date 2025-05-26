@@ -45,7 +45,7 @@ export class RecipeFactory {
     for (let i = 0; i < recipes.length; i++) {
       const recipe = recipes[i];
 
-      // General search: name, description, or any ingredient
+      // recherche générale
       let matchesGeneral = !general;
       if (!matchesGeneral) {
         if (recipe.name.toLowerCase().includes(general) ||
@@ -61,7 +61,7 @@ export class RecipeFactory {
         }
       }
 
-      // Ingredients filter: all selected ingredients must be present
+      // Filtre des ingrédients
       let matchesIngredients = selectedIngredients.length === 0;
       if (!matchesIngredients) {
         matchesIngredients = true;
@@ -81,7 +81,7 @@ export class RecipeFactory {
         }
       }
 
-      // Appliances filter: all selected appliances must match
+      // Filtre des appareils
       let matchesAppliances = selectedAppliances.length === 0;
       if (!matchesAppliances) {
         matchesAppliances = true;
@@ -94,7 +94,7 @@ export class RecipeFactory {
         }
       }
 
-      // Ustensils filter: all selected ustensils must be present
+      // Filtre des ustensiles
       let matchesUstensils = selectedUstensils.length === 0;
       if (!matchesUstensils) {
         matchesUstensils = true;
