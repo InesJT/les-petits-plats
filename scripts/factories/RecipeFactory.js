@@ -36,7 +36,7 @@ export class RecipeFactory {
     const selectedUstensils = filterChoices.ustensils || [];
 
     return recipes.filter((recipe) => {
-      // General search: name, description, or any ingredient
+      // Recherche générale : nom, déscription ou ingrédient
       const matchesGeneral =
         !general ||
         recipe.name.toLowerCase().includes(general) ||
@@ -45,7 +45,7 @@ export class RecipeFactory {
           ing.ingredient.toLowerCase().includes(general)
         );
 
-      // Ingredients filter: all selected ingredients must be present
+      // Filtre des ingrédients: tous les ingrédients sélectionnés doivent être présents
       const matchesIngredients =
         selectedIngredients.length === 0 ||
         selectedIngredients.every((ingredientName) =>
@@ -54,14 +54,14 @@ export class RecipeFactory {
           )
         );
 
-      // Appliances filter: all selected appliances must match
+      // Filtre des appareils : tous les appareils doivent être présents
       const matchesAppliances =
         selectedAppliances.length === 0 ||
         selectedAppliances.every(
           (applianceName) => recipe.appliance.toLowerCase() === applianceName
         );
 
-      // Ustensils filter: all selected ustensils must be present
+      // Filtre des ustensils : tous les ustensils doivent être présents
       const matchesUstensils =
         selectedUstensils.length === 0 ||
         selectedUstensils.every((ustensilName) =>
