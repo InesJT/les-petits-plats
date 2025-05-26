@@ -2,31 +2,25 @@ import { Recipe } from "../classes/recipe.js";
 
 export class RecipeFactory {
   getRecipes(recipes) {
-    const result = [];
-    for (let i = 0; i < recipes.length; i++) {
-      result.push(new Recipe(recipes[i]));
-    }
-    return result;
+    return recipes.map(recipe => new Recipe(recipe));
   }
 
   getFilters(recipes) {
-    const ingredients = new Set();
-    const appliances = new Set();
-    const ustensils = new Set();
+    const ingredients = new Set([]);
+    const appliances = new Set([]);
+    const ustensils = new Set([]);
 
-    for (let i = 0; i < recipes.length; i++) {
-      const recipe = recipes[i];
-
-      for (let j = 0; j < recipe.ingredients.length; j++) {
-        ingredients.add(recipe.ingredients[j].ingredient.toLowerCase());
-      }
+    recipes.forEach((recipe) => {
+      recipe.ingredients.forEach((ing) => {
+        ingredients.add(ing.ingredient.toLowerCase());
+      });
 
       appliances.add(recipe.appliance.toLowerCase());
 
-      for (let k = 0; k < recipe.ustensils.length; k++) {
-        ustensils.add(recipe.ustensils[k].toLowerCase());
-      }
-    }
+      recipe.ustensils.forEach((ustensil) => {
+        ustensils.add(ustensil.toLowerCase());
+      });
+    });
 
     return {
       ingredients: ingredients,
@@ -35,94 +29,75 @@ export class RecipeFactory {
     };
   }
 
-  filterRecipes(recipes, filterChoices) {
+   generalSearch(recipe, filterChoices) {
     const general = filterChoices.general?.toLowerCase() || "";
-    const selectedIngredients = filterChoices.ingredients || [];
+    let matchesGeneral = !general;
+    if (!matchesGeneral) {
+      if (recipe.name.toLowerCase().includes(general) ||
+        recipe.description.toLowerCase().includes(general)) {
+        matchesGeneral = true;
+      } else {
+        for (let j = 0; j < recipe.ingredients.length; j++) {
+          if (recipe.ingredients[j].ingredient.toLowerCase().includes(general)) {
+            matchesGeneral = true;
+            break;
+          }
+        }
+      }
+    }
+    return matchesGeneral;
+  }
+
+  criteriaSearch(recipe, filterChoices) {
+     const selectedIngredients = filterChoices.ingredients || [];
     const selectedAppliances = filterChoices.appliances || [];
     const selectedUstensils = filterChoices.ustensils || [];
 
-    const filteredRecipes = [];
-    for (let i = 0; i < recipes.length; i++) {
-      const recipe = recipes[i];
+    // Filtre des ingrédients: tous les ingrédients sélectionnés doivent être présents
+    const matchesIngredients =
+      selectedIngredients.length === 0 ||
+      selectedIngredients.every((ingredientName) =>
+        recipe.ingredients.some(     
+          (ing) => ing.ingredient.toLowerCase() === ingredientName
+        )
+      );
 
-      // recherche générale
-      let matchesGeneral = !general;
-      if (!matchesGeneral) {
-        if (recipe.name.toLowerCase().includes(general) ||
-          recipe.description.toLowerCase().includes(general)) {
-          matchesGeneral = true;
-        } else {
-          for (let j = 0; j < recipe.ingredients.length; j++) {
-            if (recipe.ingredients[j].ingredient.toLowerCase().includes(general)) {
-              matchesGeneral = true;
-              break;
-            }
-          }
-        }
-      }
+    // Filtre des appareils : tous les appareils doivent être présents
+    const matchesAppliances =
+      selectedAppliances.length === 0 ||
+      selectedAppliances.every(
+        (applianceName) => recipe.appliance.toLowerCase() === applianceName
+      );
 
-      // Filtre des ingrédients
-      let matchesIngredients = selectedIngredients.length === 0;
-      if (!matchesIngredients) {
-        matchesIngredients = true;
-        for (let idx = 0; idx < selectedIngredients.length; idx++) {
-          const ingredientName = selectedIngredients[idx];
-          let found = false;
-          for (let j = 0; j < recipe.ingredients.length; j++) {
-            if (recipe.ingredients[j].ingredient.toLowerCase() === ingredientName) {
-              found = true;
-              break;
-            }
-          }
-          if (!found) {
-            matchesIngredients = false;
-            break;
-          }
-        }
-      }
+    // Filtre des ustensils : tous les ustensils doivent être présents
+    const matchesUstensils =
+      selectedUstensils.length === 0 ||
+      selectedUstensils.every((ustensilName) =>
+        recipe.ustensils.some(
+          (ustensil) => ustensil.toLowerCase() === ustensilName
+        )
+      );
+    
+    return {
+      matchesIngredients,
+      matchesAppliances,
+      matchesUstensils,
+    }
+  }
 
-      // Filtre des appareils
-      let matchesAppliances = selectedAppliances.length === 0;
-      if (!matchesAppliances) {
-        matchesAppliances = true;
-        for (let idx = 0; idx < selectedAppliances.length; idx++) {
-          const applianceName = selectedAppliances[idx];
-          if (recipe.appliance.toLowerCase() !== applianceName) {
-            matchesAppliances = false;
-            break;
-          }
-        }
-      }
+  filterRecipes(recipes, filterChoices) {
+    return recipes.filter((recipe) => {
+      // Recherche générale : nom, déscription ou ingrédient
+      const matchesGeneral = this.generalSearch(recipe, filterChoices);
 
-      // Filtre des ustensiles
-      let matchesUstensils = selectedUstensils.length === 0;
-      if (!matchesUstensils) {
-        matchesUstensils = true;
-        for (let idx = 0; idx < selectedUstensils.length; idx++) {
-          const ustensilName = selectedUstensils[idx];
-          let found = false;
-          for (let j = 0; j < recipe.ustensils.length; j++) {
-            if (recipe.ustensils[j].toLowerCase() === ustensilName) {
-              found = true;
-              break;
-            }
-          }
-          if (!found) {
-            matchesUstensils = false;
-            break;
-          }
-        }
-      }
+      const {matchesIngredients, matchesAppliances, matchesUstensils} = this.criteriaSearch(recipe, filterChoices);      
 
-      if (
+      return (
         matchesGeneral &&
         matchesIngredients &&
         matchesAppliances &&
         matchesUstensils
-      ) {
-        filteredRecipes.push(recipe);
-      }
-    }
-    return filteredRecipes;
+      );
+    });
   }
 }
